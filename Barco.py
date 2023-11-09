@@ -1,9 +1,25 @@
-class Barco:
-    def __init__(self, id: int, capacidad_maxima: float, capacidad_tanque: float):
-        self.id = id
-        self.capacidad_maxima = capacidad_maxima
-        self.capacidad_tanque = capacidad_tanque
 
-    def consumir_nafta(self):
-        print("Se realiza consumir nafta")
+from Conexion import Conexion
+from Cargamento import Cargamento
+
+class Barco:
+    def IniciarBD(self):
+      self.conexion = Conexion(self.nombreBD)
+      self.cursor = self.conexion.cursor
+
+    def __init__(self, nombreBD):
+        self.nombreBD = nombreBD
+        self.IniciarBD()
+        self.cargamento = Cargamento(self.nombreBD)  
+
+    def CrearBarco(self, capacidadMaxima, capacidadTanque, cargamento_id):
+        self.cursor.execute(
+          "INSERT INTO BARCO (capacidadMaxima, capacidadTanque, cargamento_id) VALUES (?, ?, ?)",
+          (capacidadMaxima, capacidadTanque, cargamento_id))
+        self.conexion.commit()
+
+    def MostrarBarcos(self):
+        self.cursor.execute("SELECT * FROM BARCO")
+        barcos = self.cursor.fetchall()
+        return barcos
       
