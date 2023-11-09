@@ -27,6 +27,14 @@ class Conexion:
                 FOREIGN KEY(cargamento_id) REFERENCES CARGAMENTO(id)
             )
         ''')
+        self.cursor.execute('''
+          CREATE TABLE IF NOT EXISTS VIAJE(
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              lugar_salida VARCHAR(45),
+              lugar_llegada VARCHAR(45),
+              FOREIGN KEY (barco_id) REFERENCES BARCO(id)
+          )
+      ''')
         self.conexion.commit()
 
     def CerrarBD(self):

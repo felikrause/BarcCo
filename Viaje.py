@@ -1,24 +1,36 @@
-from typing import List
 
-from Barco import Barco
-from Marinero import Marinero
-from Parada import Parada
-
-
+from Conexion import Conexion
 class Viaje:
 
-  def __init__(self, id: int, barco:Barco, marinero: Marinero,
-               recorrido: List[Parada]):
-    self.id = id
-    self.barco = barco
-    self.marinero = marinero
-    self.recorrido = recorrido
+  def __init__(self, nombreBD, barco_id, lugar_salida, lugar_llegada):
+    self.barco_id = barco_id
+    self.lugar_salida = lugar_salida
+    self.lugar_llegada = lugar_llegada
+    self.nombreBD = nombreBD
+    self.IniciarBD()
 
-  def calcular_gasto(self):
-    print("Se realiza calcular gasto")
+  def IniciarBD(self):
+    self.conexion = Conexion(self.nombreBD)
+    self.cursor = self.conexion.cursor
 
-  def calcular_costo(self):
-    print("Se realiza calcular costo")
+  def asignar_lugares(self, lugar_salida, lugar_llegada):
+    self.lugar_salida = lugar_salida
+    self.lugar_llegada = lugar_llegada
 
-  def calcular_tiempo(self):
-    print("Se realiza calcular tiempo")
+  def iniciar_viaje(self, barco_id, lugar_salida, lugar_llegada):
+    self.barco_id = barco_id
+    self.lugar_salida = lugar_salida
+    self.lugar_llegada = lugar_llegada
+    self.cursor.execute(
+      "INSERT INTO VIAJE (barco_id, lugar_salida, lugar_llegada) VALUES (?, ?, ?)",
+      (self.barco_id, self.lugar_salida, self.lugar_llegada))
+    self.conexion.commit()
+
+  def mostrar_viaje(self):
+    self.cursor.execute("SELECT * FROM VIAJE")
+    viaje = self.cursor.fetchall()
+    return viaje
+  
+
+  
+    

@@ -1,49 +1,87 @@
 from Conexion import Conexion
 from Barco import Barco
 from Cargamento import Cargamento
+from Viaje import Viaje
 
 conexion = Conexion("mi_basede_datos.db")
 conexion.CrearDB()
 
-barco = Barco("mi_basede_datos.db")
-cargamento = Cargamento("mi_basede_datos.db")
+barco_instancia = Barco("mi_basede_datos.db")
+cargamento_instancia = Cargamento("mi_basede_datos.db")
 
 
 def ingresar_cargamento():
   tipo_cargamento = input("Ingrese el tipo de cargamento: ")
   peso_total = float(input("Ingrese el peso total del cargamento: "))
-  cargamento.InsertarCargamento(tipo_cargamento, peso_total)
+  cargamento_instancia.InsertarCargamento(tipo_cargamento, peso_total)
 
 
 def mostrar_cargamentos():
   global cargamento
-  cargamentos = cargamento.MostrarCargamento()
+  cargamentos = cargamento_instancia.MostrarCargamento()
   print("Cargamentos:")
   for cargamento in cargamentos:
-    print(f"ID: {cargamento[0]}, Tipo:", {cargamento[1]}, "Peso Total:", {cargamento[2]})
+    print(f"ID: {cargamento[0]}, Tipo:", {cargamento[1]}, "Peso Total:",
+          {cargamento[2]})
 
 
 def mostrar_cargamentos_por_tipo():
   global cargamento
-  cargamentos = cargamento.MostrarCargamentoPorTipo()
+  cargamentos = cargamento_instancia.MostrarCargamentoPorTipo()
   print("Cargamentos:")
   for cargamento in cargamentos:
-    print(f"ID: {cargamento[0]}, Tipo:", {cargamento[1]}, "Peso Total:", {cargamento[2]})
+    print(f"ID: {cargamento[0]}, Tipo:", {cargamento[1]}, "Peso Total:",
+          {cargamento[2]})
+
 
 def crear_barco():
   capacidad_maxima = float(input("Ingrese la capacidad máxima del barco: "))
-  capacidad_tanque = float(input("Ingrese la capacidad del tanque del barco: "))
-  cargamento_id = int(input("Ingrese el ID del cargamento asociado al barco: "))
-  barco.CrearBarco(capacidad_maxima, capacidad_tanque, cargamento_id)
+  capacidad_tanque = float(
+      input("Ingrese la capacidad del tanque del barco: "))
+  cargamento_id = int(
+      input("Ingrese el ID del cargamento asociado al barco: "))
+  barco_seleccionado = barco_instancia.CrearBarco(capacidad_maxima,
+                                                  capacidad_tanque,
+                                                  cargamento_id)
+  return barco_seleccionado
+
 
 def mostrar_barco():
   global barco
-  barcos = barco.MostrarBarcos()
+  barcos = barco_instancia.MostrarBarcos()
   print("Barcos:")
   for barco in barcos:
-      print(f"ID: {barco[0]}, Capacidad Máxima: {barco[1]}, Capacidad Tanque: {barco[2]}, Cargamento ID: {barco[3]}")
+    print(
+        f"ID: {barco[0]}, Capacidad Máxima: {barco[1]}, Capacidad Tanque: {barco[2]}, Cargamento ID: {barco[3]}"
+    )
 
-# Menú principal
+def iniciar_viaje():
+  mostrar_barco()
+  global barco
+  id_barco = int(input("Seleccione el ID del barco para el viaje: "))
+  barco_seleccionado = barco_instancia.ObtenerBarcoPorId(id_barco)
+
+  if barco_seleccionado:
+    viaje = Viaje("mi_basede_datos.db", barco_seleccionado, None, None)
+
+    lugar_salida = input("Ingrese el lugar de salida: ")
+    lugar_llegada = input("Ingrese el lugar de llegada: ")
+
+    viaje.asignar_lugares(lugar_salida, lugar_llegada)
+    viaje.iniciar_viaje(id_barco, lugar_salida, lugar_llegada)
+  else:
+    print("Barco no encontrado.")
+
+
+def mostrar_viajes():
+  viaje = Viaje("mi_basede_datos.db", None, None, None)
+  viajes = viaje.mostrar_viaje()
+  print("Viajes:")
+  for v in viajes:
+    print(
+        f"ID Viaje: {v[0]}, Barco ID: {v[1]}, Lugar Salida: {v[3]}, Lugar Llegada: {v[4]}"
+    )
+
 
 def main():
   while True:
@@ -53,7 +91,9 @@ def main():
     print("3. Mostrar cargamento por tipo de cargamento ascendente")
     print("4. Crear barco")
     print("5. Mostrar barco")
-    print("6. Salir")
+    print("6. Iniciar Viaje")
+    print("7. Mostrar Viajes")
+    print("8. Salir")
     opcion = input("Ingrese la opción que desea realizar: ")
 
     if opcion == "1":
@@ -67,9 +107,14 @@ def main():
     elif opcion == "5":
       mostrar_barco()
     elif opcion == "6":
+      iniciar_viaje()
+    elif opcion == "7":
+      mostrar_viajes()
+    elif opcion == "8":
       conexion.CerrarBD()
       break
     else:
       print("Opción no válida. Por favor, seleccione una opción válida.")
 
-main();
+
+main()

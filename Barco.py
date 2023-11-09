@@ -22,4 +22,9 @@ class Barco:
         self.cursor.execute("SELECT * FROM BARCO")
         barcos = self.cursor.fetchall()
         return barcos
-      
+
+
+    def ObtenerBarcoPorId(self, barco_id):
+      self.cursor.execute("SELECT * FROM BARCO WHERE id = ?", (barco_id,))
+      barco_by_id = self.cursor.fetchall()
+      return barco_by_id
