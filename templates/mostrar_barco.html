@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Barcos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Mostrar Barcos</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Capacidad Máxima</th>
+            <th>Capacidad Tanque</th>
+            <th>ID Cargamento Asociado</th>
+        </tr>
+        {% for barco in barcos %}
+            <tr>
+                <td>{{ barco[0] }}</td>
+                <td>{{ barco[1] }}</td>
+                <td>{{ barco[2] }}</td>
+                <td>{{ barco[3] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+
+</body>
+</html>

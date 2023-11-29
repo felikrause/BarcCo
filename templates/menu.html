@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <header id="cabecera">
+    <h1>Menú Bienvenido 
+    </h1> 
+  </header>
+  
+  <nav id="menu">
+    <ul id="lista">
+        <li><a href="#" onclick="navegar('{{ url_for('crear_cargamento') }}', 'Crear Cargamento')">Ingresar Cargamento</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('mostrar_cargamentos') }}', 'Mostrar Cargamentos')">Mostrar Cargamentos</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('mostrar_cargamentos_por_tipo') }}', 'Mostrar Cargamentos por Tipo')">Mostrar Cargamentos por Tipo</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('crear_barco') }}', 'Crear Barco')">Crear Barco</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('mostrar_barco') }}', 'Mostrar Barco')">Mostrar Barcos</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('iniciar_viaje') }}', 'Iniciar Viaje')">Iniciar Viaje</a></li>
+        <li><a href="#" onclick="navegar('{{ url_for('mostrar_viajes') }}', 'Mostrar Viajes')">Mostrar Viajes</a></li>
+    </ul>
+  </nav>
+
+  <script>
+      function navegar(ruta, titulo) {
+          $.ajaxSetup({ cache: false });
+          $.ajax({
+              type: 'GET',
+              url: ruta,
+              success: function(response) {
+                  $('#contenido').html(response);
+              },
+              error: function(error) {
+                  console.log("Error:", error);
+              }
+          });
+      }
+  </script>
+                  
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Viaje</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Iniciar Viaje</h1>
+
+    <form method="post" action="{{ url_for('iniciar_viaje') }}">
+        <label for="id_barco">Seleccione el ID del Barco para el Viaje:</label>
+        <input type="number" id="id_barco" name="id_barco" required><br>
+
+        <label for="lugar_salida">Lugar de Salida:</label>
+        <input type="text" id="lugar_salida" name="lugar_salida" required><br>
+
+        <label for="lugar_llegada">Lugar de Llegada:</label>
+        <input type="text" id="lugar_llegada" name="lugar_llegada" required><br>
+
+        <input type="submit" value="Iniciar Viaje">
+    </form>
+
+    <br>
+    <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+
+</body>
+</html>

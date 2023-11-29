@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Cargamentos por Tipo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Mostrar Cargamentos por Tipo</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Peso Total</th>
+        </tr>
+        {% for cargamento in cargamentos %}
+            <tr>
+                <td>{{ cargamento[0] }}</td>
+                <td>{{ cargamento[1] }}</td>
+                <td>{{ cargamento[2] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+
+</body>
+</html>

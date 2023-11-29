@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Barco</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Crear Barco</h1>
+
+    <form method="post" action="{{ url_for('crear_barco') }}">
+        <label for="capacidad_maxima">Capacidad Máxima del Barco:</label>
+        <input type="number" id="capacidad_maxima" name="capacidad_maxima" required><br>
+
+        <label for="capacidad_tanque">Capacidad del Tanque del Barco:</label>
+        <input type="number" id="capacidad_tanque" name="capacidad_tanque" required><br>
+
+        <label for="cargamento_id">ID del Cargamento Asociado:</label>
+        <input type="number" id="cargamento_id" name="cargamento_id" required><br>
+
+        <input type="submit" value="Crear Barco">
+    </form>
+
+    <br>
+    <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Crear Cargamento</title>
+</head>
+<body>
+    <h1>Crear Cargamento</h1>
+    <form method="post" action="{{ url_for('crear_cargamento') }}">
+        <label for="tipo_cargamento">Tipo de Cargamento:</label>
+        <input type="text" id="tipo_cargamento" name="tipo_cargamento" required><br>
+
+        <label for="peso_total">Peso Total:</label>
+        <input type="number" id="peso_total" name="peso_total" required><br>
+
+        <input type="submit" value="Crear Cargamento">
+    </form>
+
+  <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+</body>
+</html>

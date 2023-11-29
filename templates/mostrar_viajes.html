@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Viajes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Mostrar Viajes</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID Viaje</th>
+            <th>ID Barco</th>
+            <th>Lugar de Salida</th>
+            <th>Lugar de Llegada</th>
+        </tr>
+        {% for viaje in viajes %}
+            <tr>
+                <td>{{ viaje[0] }}</td>
+                <td>{{ viaje[1] }}</td>
+                <td>{{ viaje[3] }}</td>
+                <td>{{ viaje[4] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
+
+</body>
+</html>
