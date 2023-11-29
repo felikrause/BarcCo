@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #cac4c4;
+  height:10000;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin: 10px 0;
+}
+
+#Errornombre , #Errorsalario{
+  display:none;
+  color:red;
+}
+
+#cabecera{
+  text-align:center;
+  justify-content:center;
+
+}
+#content{
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  gap:10px;
+  margin-top:100px;
+ 
+}
+#contenido{
+
+  display:flex;
+  align-content:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  background-color:#d6d6d6;
+  width:350px;
+  height:350:px
+}
+#empleadoForm{
+  display:flex;
+  align-content:center;
+  justify-content:center;
+  flex-direction:column;
+  background-color:#65625d;
+}
+
+#menu{
+  display:flex;
+  align-content:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  background-color:yellow;
+ 
+}
+#lista {
+
+  display:flex;
+  align-content:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  background-color:#a4a460;
+
+
+  
+}
+#container{
+  display:flex;
+  align-content:center;
+  justify-content:center;
+}
