@@ -13,13 +13,27 @@
     <form method="post" action="{{ url_for('crear_cargamento') }}">
         <label for="tipo_cargamento">Tipo de Cargamento:</label>
         <input type="text" id="tipo_cargamento" name="tipo_cargamento" required><br>
-
+        <p>Los cargamentos deben pesar un minimo de 250 toneladas y un máximo de 1000 toneladas.</p>
         <label for="peso_total">Peso Total:</label>
         <input type="number" id="peso_total" name="peso_total" required><br>
 
-        <input type="submit" value="Crear Cargamento">
+<input type="submit" value="Crear Cargamento" onclick="return validatePesoTotal() && navegar('{{ url_for('menu') }}', 'Volver al Menú')">
     </form>
 
   <a href="#" onclick="navegar('{{ url_for('menu') }}', 'Volver al Menú')">Volver al Menú</a>
 </body>
 </html>
+<script>
+  function validatePesoTotal() {
+    var pesoTotal = document.getElementById('peso_total').value;
+    if (pesoTotal <= 250) {
+      alert('El peso total del cargamento no puede ser menor a 250');
+      return false;
+    } else if (pesoTotal >= 1000) {
+      alert('El peso total del cargamento no puede exceder 1000');
+      return false;
+    } else {  
+    return true;
+    }
+  }
+</script>
